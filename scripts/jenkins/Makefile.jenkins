@@ -4,17 +4,15 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 JENKINS_MAKEFILE_PATH := scripts/jenkins/Makefile.jenkins
 
 build-h2o-3:
-	echo $$ADDITIONAL_GRADLE_OPTS
 	@echo "+--Building H2O-3--+"
 	@echo
 	@echo "+--Cleaning--+"
-	./gradlew clean $$ADDITIONAL_GRALE_OPTS
+	./gradlew clean $$ADDITIONAL_GRADLE_OPTS
 	@echo
 	@echo "+--Building--+"
-	echo $$ADDITIONAL_GRADLE_OPTS
-	./gradlew build -x test $$ADDITIONAL_GRALE_OPTS
+	./gradlew build -x test $$ADDITIONAL_GRADLE_OPTS
 	@echo "+--Test JAR--+"
-	./gradlew testJar $$ADDITIONAL_GRALE_OPTS
+	./gradlew testJar $$ADDITIONAL_GRADLE_OPTS
 	@echo "+--Git Diff Check--+"
 	if [[ $$(git diff) ]]; then \
 		echo "Non-zero git diff after running gradlew build:"; \
@@ -22,11 +20,11 @@ build-h2o-3:
 		exit 1; \
 	fi
 	@echo "+--Gradle Check--+"
-	./gradlew -PdoCheckStyle check -x test $$ADDITIONAL_GRALE_OPTS
+	./gradlew -PdoCheckStyle check -x test $$ADDITIONAL_GRADLE_OPTS
 
 warmup-caches:
 	@$(MAKE) -f $(THIS_FILE) build-h2o-3
-	./gradlew cpLibs $$ADDITIONAL_GRALE_OPTS
+	./gradlew cpLibs $$ADDITIONAL_GRADLE_OPTS
 
 test-package-py:
 	cd h2o-py/tests/ && rm -f -r testdir_hdfs
@@ -216,14 +214,14 @@ test-junit-jenkins:
 	@$(MAKE) -f $(THIS_FILE) test-junit
 
 test-junit:
-	./gradlew test $$ADDITIONAL_GRALE_OPTS
+	./gradlew test $$ADDITIONAL_GRADLE_OPTS
 
 test-junit-smoke-jenkins:
 	find . -name 'test*Node.sh' -type f -exec sed -i 's/cat $$OUTDIR\/out*/echo "###### Printing last 400 lines of logs. Check artifacts for more. ######"; tail -n 400 $$OUTDIR\/out*/g' {} +
 	@$(MAKE) -f $(THIS_FILE) test-junit-smoke
 
 test-junit-smoke:
-	DOONLY=$$(head -n 1 tests/doOnlyJunitSmokeTestList) ./gradlew h2o-core:test h2o-algos:test h2o-scala_2.10:test h2o-scala_2.11:test $$ADDITIONAL_GRALE_OPTS
+	DOONLY=$$(head -n 1 tests/doOnlyJunitSmokeTestList) ./gradlew h2o-core:test h2o-algos:test h2o-scala_2.10:test h2o-scala_2.11:test $$ADDITIONAL_GRADLE_OPTS
 
 test-xgb-smoke-minimal-jenkins:
 	find . -name 'test*Node.sh' -type f -exec sed -i 's/cat $$OUTDIR\/out*/echo "###### Printing last 400 lines of logs. Check artifacts for more. ######"; tail -n 400 $$OUTDIR\/out*/g' {} +
@@ -238,11 +236,11 @@ test-xgb-smoke-gpu-jenkins:
 	@$(MAKE) -f $(THIS_FILE) test-xgb-smoke-gpu
 
 test-xgb-smoke-minimal:
-	./gradlew h2o-ext-xgboost:test $$ADDITIONAL_GRALE_OPTS
+	./gradlew h2o-ext-xgboost:test $$ADDITIONAL_GRADLE_OPTS
 	$(call check_xgb_backend,'xgboost4j_minimal')
 
 test-xgb-smoke-omp:
-	./gradlew h2o-ext-xgboost:test $$ADDITIONAL_GRALE_OPTS
+	./gradlew h2o-ext-xgboost:test $$ADDITIONAL_GRADLE_OPTS
 	$(call check_xgb_backend,'xgboost4j_\(omp\|gpu\)')
 
 test-xgb-smoke-gpu:
@@ -268,6 +266,5 @@ test-hadoop-smoke:
 	cd h2o-hadoop/tests/python && ../../../scripts/run.py --wipeall --usecloud "$$CLOUD_IP:$$CLOUD_PORT" --ldap.username $$LDAP_USERNAME --ldap.password $$LDAP_PASSWORD
 
 coverage-junit-algos:
-	echo $$ADDITIONAL_GRADLE_OPTS
 	./gradlew h2o-algos:test $$ADDITIONAL_GRADLE_OPTS
-	./gradlew jacocoMergeExecs $$ADDITIONAL_GRALE_OPTS
+	./gradlew jacocoMergeExecs $$ADDITIONAL_GRADLE_OPTS

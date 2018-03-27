@@ -33,7 +33,7 @@ def call(final pipelineContext, final Closure body) {
     def makeVars = []
     def additionalGradleOpts = pipelineContext.getBuildConfig().getAdditionalGradleOpts()
     if (additionalGradleOpts != null && !additionalGradleOpts.isEmpty()) {
-      makeVars += "ADDITIONAL_GRALE_OPTS='${pipelineContext.getBuildConfig().getAdditionalGradleOpts().join(' ')}'"
+      makeVars += "ADDITIONAL_GRADLE_OPTS='${pipelineContext.getBuildConfig().getAdditionalGradleOpts().join(' ')}'"
     }
 
     config.customBuildAction = """
