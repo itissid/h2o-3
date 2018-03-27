@@ -48,7 +48,7 @@ def call(final pipelineContext, final Closure body) {
       fi
 
       echo "Running Make"
-      export ${makeVars.join(' ')} 
+      export ${makeVars.join(' ')}
       make -f ${config.makefilePath} ${config.target}
     """
   }
