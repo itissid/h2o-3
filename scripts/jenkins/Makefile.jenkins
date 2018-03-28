@@ -200,8 +200,9 @@ test-package-java:
 		h2o-core/build/classes/main \
 		h2o-scala/src/ \
 		h2o-scala/build/h2o-scala_2.*/libs/h2o-scala_2.*.jar \
-		scripts/run.py py scripts/test-xgb-gpu-smoke.sh\
-		sort_crash.csv tests/doOnlyJunitSmokeTestList
+		scripts/run.py py scripts/test-xgb-gpu-smoke.sh \
+		sort_crash.csv tests/doOnlyJunitSmokeTestList \
+		jacoco/*.jar
 	find . -name "*.gradle" | zip -q -r test-package-java \
 	    -x h2o-web/* \
 	    -x h2o-bindings/* \
