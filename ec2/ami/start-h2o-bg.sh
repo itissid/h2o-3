@@ -11,7 +11,7 @@ tmp=$[ $memTotalMb * 90 ]
 xmxMb=$[ $tmp / 100 ]
 
 # First try running java.
-export JAVA_HOME=${d}/jdk1.7.0_80
+export JAVA_HOME=${d}/jdk1.7.0_40
 echo JAVA_HOME is ${JAVA_HOME}
 ${JAVA_HOME}/bin/java -version
 
@@ -41,5 +41,5 @@ then
 fi
 
 # Start H2O disowned in the background.
-nohup ${JAVA_HOME}/bin/java -Xmx${xmxMb}m -jar h2o.jar -name H2ODemo -flatfile flatfile.txt -port 54321 -beta -ice_root ${d}/ice_root ${hdfs_config_option} ${hdfs_config_value} ${hdfs_option} ${hdfs_option_value} ${hdfs_version} ${aws_credentials} 1> h2o.out 2> h2o.err &
+nohup ${JAVA_HOME}/bin/java -Xmx${xmxMb}m -jar h2o.jar -name H2ODemo -flatfile flatfile.txt -port 54321 -beta -ice_root ${d}/ice_root ${hdfs_config_option} ${hdfs_config_value} ${hdfs_option} ${hdfs_option_value} ${hdfs_version} ${aws_credentials} 1> h2o.out 2> h2o.err &;
 

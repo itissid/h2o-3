@@ -22,7 +22,7 @@ do
 
     while true
     do
-        ssh -o StrictHostKeyChecking=no -i ${AWS_SSH_PRIVATE_KEY_FILE} ec2-user@${publicDnsName} hostname
+        ssh -o StrictHostKeyChecking=no -i ${AWS_SSH_PRIVATE_KEY_FILE} ${publicDnsName} hostname
         if [ $? -eq 0 ]
         then
             break

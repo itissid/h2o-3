@@ -20,7 +20,7 @@ for publicDnsName in $(cat nodes-public)
 do
     i=$((i+1))
     echo "Copying flatfile to node ${i}: ${publicDnsName}"
-    scp -o StrictHostKeyChecking=no -i ${AWS_SSH_PRIVATE_KEY_FILE} ${flatfileName} ec2-user@${publicDnsName}:
+    scp -o StrictHostKeyChecking=no -i ${AWS_SSH_PRIVATE_KEY_FILE} ${flatfileName} ${publicDnsName}:
 done
 
 echo Success.

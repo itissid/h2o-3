@@ -1,8 +1,4 @@
 #!/bin/bash
-#AWS_ACCESS_KEY_ID=''
-#AWS_SECRET_ACCESS_KEY=''
-#AWS_SSH_PRIVATE_KEY_FILE=''
-echo $AWS_SSH_PRIVATE_KEY_FILE
 
 set -e
 
@@ -66,7 +62,7 @@ for publicDnsName in $(cat nodes-public)
 do
     i=$((i+1))
     echo "Copying aws credential files to node ${i}: ${publicDnsName}"
-    scp -p -o StrictHostKeyChecking=no -i ${AWS_SSH_PRIVATE_KEY_FILE} ${coreSiteFileName} ${awsCredentialsPropertiesFileName} ec2-user@${publicDnsName}:.ec2
+    scp -p -o StrictHostKeyChecking=no -i ${AWS_SSH_PRIVATE_KEY_FILE} ${coreSiteFileName} ${awsCredentialsPropertiesFileName} ${publicDnsName}:.ec2
 done
 
 echo Success.
