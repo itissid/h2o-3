@@ -14,7 +14,7 @@ for publicDnsName in $(cat nodes-public)
 do
     i=$((i+1))
     echo Starting on node ${i}: ${publicDnsName}...
-    ssh -o StrictHostKeyChecking=no ${publicDnsName} ./start-h2o-bg.sh
+    ssh -o StrictHostKeyChecking=no ${publicDnsName} ./start-h2o-bg.sh &
 done
 
 echo Success.

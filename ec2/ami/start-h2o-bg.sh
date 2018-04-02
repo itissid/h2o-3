@@ -29,8 +29,8 @@ then
     hdfs_config_option="-hdfs_config"
     hdfs_config_value=".ec2/core-site.xml"
     hdfs_option="-hdfs"
-    hdfs_option_value=""
-    hdfs_version=""
+    hdfs_option_value="hdfs://10.78.14.235:9000"
+    hdfs_version="-hdfs_version=0.20.2"
 fi
 
 # AWS credentials.
