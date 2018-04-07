@@ -37,7 +37,7 @@ securityGroupName = 'launch-wizard-1'
 # Options you might want to change.
 # ---------------------------------
 
-numInstancesToLaunch = 4
+numInstancesToLaunch = 7
 instanceType = 'm1.large'
 instanceNameRoot = 'SidsH2ORCluster'
 
@@ -55,7 +55,7 @@ dryRun = False
 # --------------------------------------------------------
 
 regionName = 'us-east-1'
-amiId = 'ami-6f278312' # Copied over from my AWS account
+amiId = 'ami-577dda2a' # Copied over from my AWS account
 
 
 #--------------------------------------------------------------------------
